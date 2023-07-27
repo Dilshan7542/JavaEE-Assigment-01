@@ -108,6 +108,7 @@ public class CustomerController extends HttpServlet implements HandleController 
                     objectBuilder.add(message, "success");
                 }
             } else {
+                objectBuilder.add(message, "invalid input");
                 throw new RuntimeException("invalid input....");
             }
         } catch (Exception e) {

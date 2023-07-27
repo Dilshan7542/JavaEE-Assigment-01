@@ -10,6 +10,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemDTO {
+    public ItemDTO(String code, String description, int qty, double unitPrice) {
+        this.code = code;
+        this.description = description;
+        this.qty = qty;
+        this.unitPrice = unitPrice;
+    }
+
     String code;
     String description;
     int qty;
