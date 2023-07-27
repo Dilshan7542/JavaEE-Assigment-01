@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class OrderDetailDTO implements SuperEntity {
-    OrderDTO orderDTO;
+    OrderDTO order;
     int qty;
     int discount;
     double unitPrice;
-    Item item;
+    ItemDTO item;
 
 }

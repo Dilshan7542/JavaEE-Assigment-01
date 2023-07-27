@@ -3,9 +3,11 @@ package lk.ijse.pos.dao.custom.impl;
 import lk.ijse.pos.dao.custom.OrderDAO;
 
 import lk.ijse.pos.entity.Order;
+import lk.ijse.pos.entity.OrderDetail;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
+import java.sql.ClientInfoStatus;
 import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
@@ -29,13 +31,14 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public Order search(Session session, String s) {
-        return session.get(Order.class,s);
+     return   session.load(Order.class,s);
+
     }
 
     @Override
     public List<Order> getAll(Session session) {
         Query query = session.createQuery("FROM orders");
         query.setCacheable(true);
-        return (List<Order>) query.getResultList();
+      return  (List<Order>) query.getResultList();
     }
 }

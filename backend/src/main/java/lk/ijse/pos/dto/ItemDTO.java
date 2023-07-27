@@ -21,5 +21,5 @@ public class ItemDTO {
     String description;
     int qty;
     double unitPrice;
-    List<OrderDetail> orderDetailList;
+    List<OrderDetailDTO> orderDetailList;
 }

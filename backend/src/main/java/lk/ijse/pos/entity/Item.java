@@ -2,6 +2,8 @@ package lk.ijse.pos.entity;
 
 import lombok.*;
 import net.bytebuddy.implementation.bind.annotation.Super;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -12,6 +14,9 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
+@Cacheable
+@DynamicUpdate
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Item implements SuperEntity {
     @Id
     String code;

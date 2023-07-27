@@ -3,6 +3,9 @@ package lk.ijse.pos.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -15,17 +18,23 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity(name = "orders")
-public class Order implements SuperEntity{
+@Cacheable
+@DynamicUpdate
+@ToString
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+public class Order implements SuperEntity {
     @Id
     String orderID;
     Date date;
     Time time;
     int discount;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "customerID")
     Customer customer;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    List<OrderDetail> orderDetailList;
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ToString.Exclude
+    List<OrderDetail> orderDetailList;
 
 }

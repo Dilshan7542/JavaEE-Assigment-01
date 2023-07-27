@@ -5,6 +5,7 @@ import lk.ijse.pos.entity.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -19,8 +20,16 @@ public class OrderDTO implements SuperEntity {
     Date date;
     Time time;
     int discount;
-    Customer customer;
+    CustomerDTO customer;
+    @ToString.Exclude
     List<OrderDetailDTO> orderDetailList;
+    public OrderDTO(String orderID, Date date, Time time, int discount, CustomerDTO customer) {
+        this.orderID = orderID;
+        this.date = date;
+        this.time = time;
+        this.discount = discount;
+        this.customer = customer;
+    }
 
 
 }

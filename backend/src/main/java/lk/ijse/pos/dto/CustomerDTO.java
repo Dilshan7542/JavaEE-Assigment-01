@@ -4,6 +4,7 @@ import lk.ijse.pos.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.OneToMany;
@@ -23,5 +24,6 @@ public class CustomerDTO {
     String name;
     String address;
     double salary;
-    List<Order> orderList;
+@ToString.Exclude
+    List<OrderDTO> orderList;
 }
