@@ -1,13 +1,15 @@
 package lk.ijse.pos.bo.custom;
 
+import lk.ijse.pos.bo.SuperBO;
+import lk.ijse.pos.dto.CustomerDTO;
 import org.hibernate.Session;
 
 import java.util.List;
 
-public interface CustomerBO {
-/*    T save(Session session, T entity);
-    T update(Session session,T entity);
-    boolean delete(Session session,ID id);
-    T search(Session session,ID id);
-    List<T> getAll(Session session);*/
+public interface CustomerBO extends SuperBO {
+    CustomerDTO saveCustomer( CustomerDTO customerDTO);
+    CustomerDTO updateCustomer(CustomerDTO customerDTO);
+    boolean deleteCustomer(String id);
+    CustomerDTO searchCustomer(String id);
+    List<CustomerDTO> getAllCustomer();
 }

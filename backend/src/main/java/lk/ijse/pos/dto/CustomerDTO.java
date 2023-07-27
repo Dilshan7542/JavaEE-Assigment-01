@@ -12,6 +12,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CustomerDTO {
+    public CustomerDTO(String customerID, String name, String address, double salary) {
+        this.customerID = customerID;
+        this.name = name;
+        this.address = address;
+        this.salary = salary;
+    }
+
     String customerID;
     String name;
     String address;

@@ -19,7 +19,12 @@ public class MyFilter implements Filter {
         res.setHeader("Access-Control-Allow-Origin", "*");
         res.setHeader("Access-Control-Allow-Methods", "PUT,DELETE");
         res.addHeader("Access-Control-Allow-Headers", "Content-Type");
-        chain.doFilter(request, response);
+        try {
+            chain.doFilter(request, response);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
