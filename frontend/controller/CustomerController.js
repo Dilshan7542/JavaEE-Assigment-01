@@ -1,4 +1,4 @@
-import {customerList} from "../db/db.js";
+import {customerList} from "../db/DB.js";
 import {Customer} from "../model/Customer.js";
 
 export class CustomerController {
@@ -10,7 +10,8 @@ export class CustomerController {
         $("#customerBtnSection>:nth-child(3)").click(this.handelDeleteCustomer.bind(this));
         $("#customerBtnSection>:nth-child(4)").click(this.btnNewCustomer.bind(this));
         $("#searchCustomer").on("keyup", this.searchCustomer.bind(this));
-        this.customerList = customerList;
+        this.loadAllCustomer.bind(this);
+        this.customerList = new Array();
         this.loadAllCustomer();
         this.initialize();
     }
@@ -132,17 +133,27 @@ export class CustomerController {
     }
 
     loadAllCustomer(e) {
-        $("#tblCustomerBody").html("");
-        for (let customer of this.customerList) {
-            $("#tblCustomerBody").append(`<tr> <td>${customer.id}</td><td>${customer.name}</td><td>${customer.address}</td><td>${customer.salary}</td></tr>`);
+        $.ajax({
+            url:"http://localhost:8080/simplePOS/customer?status=GET",
+            method:"GET",
+            dataType:"json",
+            success:function (res){
+                    $("#tblCustomerBody").html("");
+                 for (let customer of res) {this.customerList.push(new Customer(customer.id,customer.name,customer.address,customer.salary));
+                        $("#tblCustomerBody").append(`<tr> <td>${customer.id}</td><td>${customer.name}</td><td>${customer.address}</td><td>${customer.salary}</td></tr>`);
 
-            document.querySelector("#tblCustomerBody>:last-child").addEventListener("click", (evt)=>{
-                this.manageControlBtn(evt);
-            });
+                        document.querySelector("#tblCustomerBody>:last-child").addEventListener("click", (evt)=>{
+                            this.manageControlBtn(evt);
+                        });
+                 }
+            },
+            error:function (e){
+                console.log(e);
+            }
+        });
+                    this.clearTextField();
+                    this.initialize();
 
-        }
-        this.clearTextField();
-        this.initialize();
     }
 
     btnNewCustomer() {

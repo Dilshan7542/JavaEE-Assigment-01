@@ -1,4 +1,4 @@
-import {customerList, itemList, orderDetailList, orderList} from "../db/db.js";
+import {customerList, itemList, orderDetailList, orderList} from "../db/DB.js";
 import {OrderDetail} from "../model/OrderDetail.js";
 import {Order} from "../model/Order.js";
 
